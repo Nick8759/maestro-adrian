@@ -55,23 +55,43 @@
     c.style.setProperty('--x', e.clientX - r.left + 'px'); c.style.setProperty('--y', e.clientY - r.top + 'px');
   }));
 
+  /* Traduzioni */
+  const T = window.I18N || { it: {} };
+  let lang = 'it';
+  const t = (k) => (T[lang] && T[lang][k]) || T.it[k] || '';
+  const syms = ['✦', '✧', '✶', '☾', '⌘', '✷'];
+  let curWork = 0;
+  const workData = (i) => [syms[i], t('k' + (19 + i)), i === 0 ? t('k50') : t('w' + (i + 1)), i === 0 ? t('k51') : t('m' + (i + 1))];
+  function renderWork(i, animate) {
+    curWork = i;
+    const w = workData(i);
+    $('#wpSym').textContent = w[0]; $('#wpTitle').textContent = w[1]; $('#wpText').textContent = w[2]; $('#wpMeta').textContent = w[3];
+    $('#wpCta').href = 'https://wa.me/+393522815456?text=' + encodeURIComponent(t('wa') + w[1]);
+    if (animate) { panel.classList.remove('is-swap'); void panel.offsetWidth; panel.classList.add('is-swap'); }
+  }
+  function setLang(l, save) {
+    if (!T[l]) l = 'it';
+    lang = l;
+    $$('[data-i18n]').forEach((el) => { const v = t(el.dataset.i18n); if (v) el.innerHTML = v; });
+    document.documentElement.lang = l;
+    document.title = t('title');
+    $$('.flag').forEach((f) => { const on = f.dataset.lang === l; f.classList.toggle('is-active', on); f.setAttribute('aria-pressed', String(on)); });
+    renderWork(curWork, false);
+    if (save) { try { localStorage.setItem('ma-lang', l); } catch (e) {} }
+  }
+  $$('.flag').forEach((f) => f.addEventListener('click', () => setLang(f.dataset.lang, true)));
+
   /* Works tabs */
-  const works = [
-    ['✦', 'Ritorno e riavvicinamento', 'Per legami spezzati da terzi, distanze improvvise, silenzi che durano da mesi. Si lavora sul filo che unisce due persone.', 'Rito personalizzato · Verifica preliminare'],
-    ['✧', 'Pulizia e slegatura', 'Rimozione di invidie, malocchio, fatture e negatività accumulate su una persona, una casa o un’attività. Prima si accerta, poi si interviene.', 'Lettura del caso · Intervento mirato'],
-    ['✶', 'Protezione e scudo', 'Per chi si sente esposto, seguito, svuotato di energie. Protezione personale e della famiglia, con monitoraggio nelle settimane successive.', 'Protezione continuativa'],
-    ['☾', 'Prosperità e affari', 'Aziende in crisi, soci sleali, investimenti in Italia ed all’estero. Si individua dove la fortuna si è interrotta e si riapre il flusso.', 'Analisi + rito di apertura'],
-    ['⌘', 'Sblocco vendite immobiliari', 'Immobili fermi da anni, trattative che saltano. Pulizia del luogo e rito di sblocco sulla proprietà e su chi la deve vendere.', 'Sopralluogo a distanza'],
-    ['✷', 'Lettura del destino', 'Consulto di orientamento: cosa si sta muovendo, chi ti è realmente vicino, quali sono i mesi favorevoli per decidere.', 'Consulto riservato'],
-  ];
   const panel = $('#work-panel');
   $$('.work').forEach((b) => b.addEventListener('click', () => {
-    const w = works[+b.dataset.i];
     $$('.work').forEach((x) => { x.classList.toggle('is-active', x === b); x.setAttribute('aria-selected', String(x === b)); });
-    $('#wpSym').textContent = w[0]; $('#wpTitle').textContent = w[1]; $('#wpText').textContent = w[2]; $('#wpMeta').textContent = w[3];
-    $('#wpCta').href = 'https://wa.me/+393522815456?text=' + encodeURIComponent('Buongiorno Maestro, vorrei informazioni su: ' + w[1]);
-    panel.classList.remove('is-swap'); void panel.offsetWidth; panel.classList.add('is-swap');
+    renderWork(+b.dataset.i, true);
   }));
+  {
+    let start = 'it';
+    try { start = new URLSearchParams(location.search).get('lang') || localStorage.getItem('ma-lang') || (navigator.language || 'it').slice(0, 2); } catch (e) {}
+    setLang(T[start] ? start : 'it', false);
+  }
 
   /* Video players */
   $$('.vplayer').forEach((v) => {

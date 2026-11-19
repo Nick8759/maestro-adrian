@@ -2,7 +2,7 @@
   --bg:#0b0806; --bg2:#120d09; --surface:#18110b; --line:rgba(214,170,92,.18);
   --gold:#d6aa5c; --gold-hi:#f2d494; --gold-lo:#8a6a32; --ember:#c2412d; --wine:#5a1410;
   --text:#efe5d3; --muted:#b4a48a; --faint:#7d6f5b;
-  --serif:'Cormorant Garamond',Georgia,serif; --display:'Cinzel',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+  --serif:'Cormorant Garamond','Noto Serif',Georgia,serif; --display:'Cinzel','Noto Serif',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
   --ease:cubic-bezier(.16,1,.3,1);
   --pad:clamp(20px,5vw,64px);
 }
@@ -299,3 +299,22 @@ h3{font-family:var(--serif);font-size:24px;line-height:1.2;font-weight:600}
   .love-flash{font-size:13px;letter-spacing:.07em;white-space:nowrap;margin-bottom:16px;padding:9px 16px}
 }
 @media (prefers-reduced-motion:reduce){.love-flash{animation:loveFlash 1.2s ease-in-out infinite!important}}
+
+/* Bandierine lingue */
+.langs{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.flag{display:flex;flex-direction:column;align-items:center;gap:5px;padding:7px 7px 5px;border-radius:10px;border:1px solid transparent;background:rgba(20,14,8,.35);transition:transform .25s var(--ease),border-color .25s,background .25s}
+.flag__img{display:block;width:32px;height:21px;border-radius:3px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.25),0 4px 10px -4px rgba(0,0,0,.8)}
+.flag__img svg{display:block;width:100%;height:100%}
+.flag__code{font-size:10px;letter-spacing:.14em;color:var(--muted);font-weight:600}
+.flag:hover{transform:translateY(-2px);border-color:rgba(214,170,92,.45)}
+.flag.is-active{border-color:var(--gold);background:rgba(214,170,92,.14)}
+.flag.is-active .flag__code{color:var(--gold-hi)}
+@media (max-width:760px){
+  .langs{justify-content:center;flex-wrap:nowrap;gap:3px;margin-top:16px}
+  .flag{padding:5px 3px 4px;gap:4px}
+  .flag__img{width:26px;height:17px}
+  .flag__code{font-size:9px;letter-spacing:.08em}
+}
+@media (max-width:760px){
+  .hero__portrait figcaption{white-space:normal;text-align:center;width:max-content;max-width:calc(100vw - 40px);letter-spacing:.12em;font-size:10px;line-height:1.4}
+}
