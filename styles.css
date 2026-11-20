@@ -340,3 +340,19 @@ h3{font-family:var(--serif);font-size:24px;line-height:1.2;font-weight:600}
 .legal-page th{color:var(--gold-hi);font-weight:500}
 .legal-back{display:inline-flex;margin-top:40px}
 .legal-nav .nav__cta{display:inline-flex!important}
+
+/* Foto coppia prima di "Ti riconosci in una di queste situazioni?" */
+.love-photo{position:relative;max-width:1040px;margin:0 auto clamp(40px,6vw,72px);border-radius:18px;overflow:hidden;border:1px solid var(--line);
+  box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 60px -20px rgba(214,170,92,.35)}
+.love-photo img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.love-photo::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 45%,transparent 55%,rgba(11,8,6,.55) 100%)}
+@media (max-width:640px){.love-photo{border-radius:14px}.love-photo img{aspect-ratio:4/3;object-position:55% 40%}}
+@media (min-width:961px){
+  .love-photo{width:min(1440px,calc(100vw - 64px));max-width:none;margin-left:calc(50% - min(720px,50vw - 32px));margin-right:0}
+  .love-photo img{aspect-ratio:21/9;object-position:50% 30%}
+}
+/* Telefono: foto coppia più grande, da bordo a bordo */
+@media (max-width:640px){
+  .love-photo{width:100vw;max-width:none;margin-left:calc(50% - 50vw);margin-right:0;border-radius:0;border-left:0;border-right:0}
+  .love-photo img{aspect-ratio:4/5;object-position:54% 30%}
+}
