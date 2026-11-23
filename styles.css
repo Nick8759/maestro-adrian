@@ -359,4 +359,4 @@ h3{font-family:var(--serif);font-size:24px;line-height:1.2;font-weight:600}
 /* Foto coppia sotto "I lavori" (Ritorno e riavvicinamento) */
 .love-photo--after{margin-top:clamp(48px,7vw,88px);margin-bottom:0}
 .love-photo--after img{object-position:50% 30%}
-@media (max-width:640px){.love-photo--after img{object-position:48% 30%}}
+@media (max-width:640px){.love-photo--after img{object-position:54% 30%}}
