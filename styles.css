@@ -360,3 +360,16 @@ h3{font-family:var(--serif);font-size:24px;line-height:1.2;font-weight:600}
 .love-photo--after{margin-top:clamp(48px,7vw,88px);margin-bottom:0}
 .love-photo--after img{object-position:50% 30%}
 @media (max-width:640px){.love-photo--after img{object-position:54% 30%}}
+
+/* Avviso lampeggiante: attenzione alle copie fatte con l'intelligenza artificiale */
+.ai-warn{margin:22px 0 26px;padding:16px 20px;max-width:560px;border:1px solid rgba(230,90,60,.75);border-radius:16px;
+  background:linear-gradient(135deg,rgba(90,20,16,.7),rgba(40,10,8,.6));box-shadow:0 0 26px rgba(214,70,40,.35)}
+.ai-warn__flash{margin:0;font-family:var(--display);font-weight:600;font-size:clamp(16px,1.7vw,20px);line-height:1.35;letter-spacing:.03em;color:#fff3d6;
+  text-shadow:0 0 12px rgba(255,120,80,.8);animation:aiWarnFlash 1.1s ease-in-out infinite}
+.ai-warn__flash strong{color:#ffd27a;letter-spacing:.06em}
+@keyframes aiWarnFlash{0%,100%{opacity:1}50%{opacity:.2}}
+.ai-warn__real{margin:10px 0 0;font-size:15px;line-height:1.5;color:var(--gold-hi)}
+.ai-warn__btn{display:inline-block;margin-left:4px;padding:3px 12px;border:1px solid var(--gold);border-radius:99px;color:#0b0806;background:var(--gold);
+  font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;text-decoration:none}
+.ai-warn__btn:hover{background:var(--gold-hi)}
+@media (max-width:760px){.ai-warn{margin:18px auto 22px;text-align:center}.ai-warn__btn{margin:8px 0 0}}
